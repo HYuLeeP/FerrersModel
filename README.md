@@ -6,6 +6,8 @@ In this project, you can find two .py modules FerrersModel and HYuPlot with clas
 
 The potential and potential gradient with a rotating Ferrers bar and a logarithmic disk/bulge/halo is written in kcf_L4_mod.py. some configurations are stored in config. (This is currently a mess, so try no to change anyting)
 
+A basic tutorial is provided in Tutorial.ipynb.
+
 More details of the methods and previous results using this model can be found at [this draft paper](https://www.mso.anu.edu.au/~lyusen/hercules_draft.pdf).
 
 Contact kenneth.freeman@anu.edu.au or li.yusen.astr@gmail.com to reach out.
