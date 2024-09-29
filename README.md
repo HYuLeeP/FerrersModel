@@ -1,4 +1,4 @@
-# Ferrers
+# Ferrers Model
 
 This is a github repo for the MilkyWay Bar model with a slow, long, Ferrers bar (based on results from Wegg et al. (2015)).
 
