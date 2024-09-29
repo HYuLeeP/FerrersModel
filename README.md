@@ -4,7 +4,7 @@ This is a github repo for the MilkyWay Bar model with a slow, long, Ferrers bar 
 
 In this project, you can find two .py modules FerrersModel and HYuPlot with classes and methods helpful for orbit integration and plotting.
 
-The potential and potential gradient with a rotating Ferrers bar and a logarithmic disk/bulge/halo is written in kcf_L4_mod.py. some configurations are stored in config. (This is currently a mess, so try no to change anyting)
+The potential and potential gradient with a rotating Ferrers bar and a logarithmic disk/bulge/halo is written in kcf_L4_mod.py. some configurations are stored in config. (This is currently a mess, so try no to change anything)
 
 A basic tutorial is provided in Tutorial.ipynb.
 
