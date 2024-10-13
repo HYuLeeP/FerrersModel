@@ -276,10 +276,14 @@ class PlotFerrers():
         ax.plot(x[cdt],y[cdt],'.',color='cyan',linewidth=linewidth,zorder=zorder)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     def PlotM2K(self,ax:plt.axes,neighbour_condition=None,color:str='blue',zorder:int=100,auto:bool=True,label=None):
 =======
     def PlotM2K(self,ax:plt.axes,neighbour_condition=None,color='blue',zorder:int=100,auto:bool=True,label=None,markersize:float=20,linewidth:float=1,marker="o"):
 >>>>>>> 8a8970b (LzVr)
+=======
+    def PlotM2K(self,ax:plt.axes,neighbour_condition=None,color='blue',zorder:int=100,auto:bool=True,label=None,markersize:float=20,linewidth:float=1,marker="o"):
+>>>>>>> main
         """
         PlotM2K: Plotting the lzvr kinematics for the orbit under certain neighbourhood condition
 
@@ -306,10 +310,14 @@ class PlotFerrers():
         Lz_Nd = Lz_ph[neighbour_condition] # SNd
         vr_Nd = vr_ph[neighbour_condition]
 <<<<<<< HEAD
+<<<<<<< HEAD
         ax.plot(vr_Nd,Lz_Nd,'o',color=color,zorder=zorder,label=label)
 =======
         ax.plot(vr_Nd,Lz_Nd,color=color,zorder=zorder,label=label,marker=marker,markersize=markersize,linewidth=linewidth)
 >>>>>>> 8a8970b (LzVr)
+=======
+        ax.plot(vr_Nd,Lz_Nd,color=color,zorder=zorder,label=label,marker=marker,markersize=markersize,linewidth=linewidth)
+>>>>>>> main
         
         if auto:
             ax.axis([-150,150,1000,2500])
