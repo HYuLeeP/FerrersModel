@@ -218,8 +218,11 @@ class PlotFerrers():
         for i in np.arange(ll):
             for j in np.arange(ll):
                 Phi[i,j] = self.init.phi(y[i],x[j])
-
-        ax.contour(x,y,Phi.T,[-self.init.ej], colors=['blue'],linestyles='dashed')
+        if self.init.ej < np.max(-Phi.flatten()):
+            # print(np.max(Phi.flatten()))
+            ax.contour(x,y,Phi.T,[-self.init.ej], colors=['blue'],linestyles='dashed')
+        ax.axis([-2.5,2.5,-2.5,2.5])
+        ax.axis("equal")
 
     def LabelXY(self,ax:plt.axes):
         """
@@ -272,7 +275,11 @@ class PlotFerrers():
         ax.plot(1.486,0.693,"r*",markersize=markersize,zorder=100)
         ax.plot(x[cdt],y[cdt],'.',color='cyan',linewidth=linewidth,zorder=zorder)
 
+<<<<<<< HEAD
     def PlotM2K(self,ax:plt.axes,neighbour_condition=None,color:str='blue',zorder:int=100,auto:bool=True,label=None):
+=======
+    def PlotM2K(self,ax:plt.axes,neighbour_condition=None,color='blue',zorder:int=100,auto:bool=True,label=None,markersize:float=20,linewidth:float=1,marker="o"):
+>>>>>>> 8a8970b (LzVr)
         """
         PlotM2K: Plotting the lzvr kinematics for the orbit under certain neighbourhood condition
 
@@ -298,7 +305,11 @@ class PlotFerrers():
             neighbour_condition=((x-1.486)**2+(y-.693)**2 < 1/25)
         Lz_Nd = Lz_ph[neighbour_condition] # SNd
         vr_Nd = vr_ph[neighbour_condition]
+<<<<<<< HEAD
         ax.plot(vr_Nd,Lz_Nd,'o',color=color,zorder=zorder,label=label)
+=======
+        ax.plot(vr_Nd,Lz_Nd,color=color,zorder=zorder,label=label,marker=marker,markersize=markersize,linewidth=linewidth)
+>>>>>>> 8a8970b (LzVr)
         
         if auto:
             ax.axis([-150,150,1000,2500])
@@ -351,7 +362,7 @@ class PlotFerrers():
             ax.set_xlabel('xs',fontsize=self.fontsize)
             ax.set_ylabel('ys',fontsize=self.fontsize)
             ax.set_title('EJ = {:.4f} '.format(self.init.ej),fontsize=self.fontsize)
-            ax.axis(axis)
+            
         
         return xs,ys
 

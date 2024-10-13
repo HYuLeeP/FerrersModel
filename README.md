@@ -11,3 +11,5 @@ A basic tutorial is provided in Tutorial.ipynb.
 More details of the methods and previous results using this model can be found at [this draft paper](https://www.mso.anu.edu.au/~lyusen/hercules_draft.pdf).
 
 Contact kenneth.freeman@anu.edu.au or li.yusen.astr@gmail.com to reach out.
+
+To include kinematics data from GALAH, download \ref{https://cloud.datacentral.org.au/teamdata/GALAH/public/GALAH_DR4/catalogs/galah_dr4_vac_dynamics_240705.fits}{the dynamics VAC} and put it under ./data/.
