@@ -85,6 +85,7 @@ class Orbit:
     IntOrbit(): integrate the orbit (x,y,vx,vy)
                 return: (x,y,vx,vy) numpy arrays
     """
+    orbit = None
     def __init__(self, init, tmax=500, rhot=200) -> None:
         self.init : InitialCondition = init
         self.phi = init.phi
@@ -149,6 +150,8 @@ class PlotFerrers():
         if init.z0 is None:
             init.InitFromEj()
         self.init=init
+        if self.orbit is None:
+            self.orbit = Orbit(init=self.init)
         self.color=color
         self.fontsize=fontsize
 
@@ -159,9 +162,8 @@ class PlotFerrers():
         """
         GetOrbit: Get the orbit if only the inital condition is provided
         """
-        if self.orbit is None:
-            self.orbit = Orbit(init=self.init)
-        else:
+        
+        if self.orbit.orbit is not None:
             tf=str(input("an orbit is given, reintegrate from inital condition? (y/n)"))
             if tf=='n':
                 pass
@@ -216,8 +218,11 @@ class PlotFerrers():
         for i in np.arange(ll):
             for j in np.arange(ll):
                 Phi[i,j] = self.init.phi(y[i],x[j])
-
-        ax.contour(x,y,Phi.T,[-self.init.ej], colors=['blue'],linestyles='dashed')
+        if self.init.ej < np.max(-Phi.flatten()):
+            # print(np.max(Phi.flatten()))
+            ax.contour(x,y,Phi.T,[-self.init.ej], colors=['blue'],linestyles='dashed')
+        ax.axis([-2.5,2.5,-2.5,2.5])
+        ax.axis("equal")
 
     def LabelXY(self,ax:plt.axes):
         """
@@ -230,7 +235,7 @@ class PlotFerrers():
         ax.set_ylabel("y (5 kpc)",fontsize=self.fontsize)
         ax.set_title(f"x0, y0 = {self.init.x0:.2f}, {self.init.y0:.2f}; EJ = {self.init.ej}",fontsize=self.fontsize)
 
-    def PlotXY(self,ax:plt.axes,linewidth=1,axis=[-2.5,2.5,-2.5,2.5],auto=True):
+    def PlotXY(self,ax:plt.axes,linewidth=1,axis=[-2.5,2.5,-2.5,2.5],auto=True,label=None):
         """
         PlotXY: Plot the orbit on the XY plane
 
@@ -242,7 +247,7 @@ class PlotFerrers():
         """
 
         x,y,_,_=self.__orbit
-        ax.plot(x,y,'-',color=self.color,zorder=5,linewidth=linewidth)
+        ax.plot(x,y,'-',color=self.color,zorder=5,linewidth=linewidth,label=label)
         ax.plot(self.init.x0,self.init.y0,'ro',zorder=10)
 
         ax.axis(axis)
@@ -270,7 +275,7 @@ class PlotFerrers():
         ax.plot(1.486,0.693,"r*",markersize=markersize,zorder=100)
         ax.plot(x[cdt],y[cdt],'.',color='cyan',linewidth=linewidth,zorder=zorder)
 
-    def PlotM2K(self,ax:plt.axes,neighbour_condition=None,color:str='blue',zorder:int=100,auto:bool=True):
+    def PlotM2K(self,ax:plt.axes,neighbour_condition=None,color='blue',zorder:int=100,auto:bool=True,label=None,markersize:float=20,linewidth:float=1,marker="o"):
         """
         PlotM2K: Plotting the lzvr kinematics for the orbit under certain neighbourhood condition
 
@@ -296,7 +301,7 @@ class PlotFerrers():
             neighbour_condition=((x-1.486)**2+(y-.693)**2 < 1/25)
         Lz_Nd = Lz_ph[neighbour_condition] # SNd
         vr_Nd = vr_ph[neighbour_condition]
-        ax.plot(vr_Nd,Lz_Nd,'o',color=color,zorder=zorder)
+        ax.plot(vr_Nd,Lz_Nd,color=color,zorder=zorder,label=label,marker=marker,markersize=markersize,linewidth=linewidth)
         
         if auto:
             ax.axis([-150,150,1000,2500])
@@ -305,7 +310,7 @@ class PlotFerrers():
 
         return Lz_Nd,vr_Nd
     
-    def PlotSOS(self,ax:plt.axes,markersize:float=5,color:str="#006666",style:str='.',to_right:bool=True,axis:list=[-2.5,2.5,-2.5,2.5],auto:bool=True):
+    def PlotSOS(self,ax:plt.axes,markersize:float=5,color:str="#006666",style:str='.',to_right:bool=True,axis:list=[-2.5,2.5,-2.5,2.5],auto:bool=True,label=None):
         """
         PlotSOS: Plot the Surface of Section of the orbit
 
@@ -341,7 +346,7 @@ class PlotFerrers():
         xs=xs[c][:-1]
         ys=ys[c][:-1]
 
-        ax.plot(xs,ys,marker=style, markersize = markersize,linestyle="None",color=color,mec='none')     # was 0.5
+        ax.plot(xs,ys,marker=style, markersize = markersize,linestyle="None",color=color,mec='none',label=label)     # was 0.5
 
         if auto:
             self.PlotBar(ax=ax)
@@ -349,7 +354,7 @@ class PlotFerrers():
             ax.set_xlabel('xs',fontsize=self.fontsize)
             ax.set_ylabel('ys',fontsize=self.fontsize)
             ax.set_title('EJ = {:.4f} '.format(self.init.ej),fontsize=self.fontsize)
-            ax.axis(axis)
+            
         
         return xs,ys
 
