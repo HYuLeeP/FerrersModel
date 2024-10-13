@@ -1,6 +1,6 @@
 # Ferrers Model
 
-This is a github repo for the MilkyWay Bar model with a slow, long, Ferrers bar (based on results from Wegg et al. (2015)).
+This is a github repo for the MilkyWay Bar model with a slow, long, Ferrers bar based on results from [Wegg et al. (2015)](https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.4050W).
 
 In this project, you can find two .py modules FerrersModel and HYuPlot with classes and methods helpful for orbit integration and plotting.
 
