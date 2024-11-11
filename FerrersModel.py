@@ -235,7 +235,7 @@ class PlotFerrers():
         ax.set_ylabel("y (5 kpc)",fontsize=self.fontsize)
         ax.set_title(f"x0, y0 = {self.init.x0:.2f}, {self.init.y0:.2f}; EJ = {self.init.ej}",fontsize=self.fontsize)
 
-    def PlotXY(self,ax:plt.axes,linewidth=1,axis=[-2.5,2.5,-2.5,2.5],auto=True,label=None):
+    def PlotXY(self,ax:plt.axes,linewidth=1,axis=[-2.5,2.5,-2.5,2.5],auto=True,label=None,color="#006666",plotinit=True):
         """
         PlotXY: Plot the orbit on the XY plane
 
@@ -247,8 +247,9 @@ class PlotFerrers():
         """
 
         x,y,_,_=self.__orbit
-        ax.plot(x,y,'-',color=self.color,zorder=5,linewidth=linewidth,label=label)
-        ax.plot(self.init.x0,self.init.y0,'ro',zorder=10)
+        ax.plot(x,y,'-',color=color,zorder=5,linewidth=linewidth,label=label)
+        if plotinit:
+            ax.plot(self.init.x0,self.init.y0,'ro',zorder=10)
 
         ax.axis(axis)
         ax.axis('equal')
