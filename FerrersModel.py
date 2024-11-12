@@ -303,7 +303,7 @@ class PlotFerrers():
         Lz_Nd = Lz_ph[neighbour_condition] # SNd
         vr_Nd = vr_ph[neighbour_condition]
         
-        ax.plot(vr_Nd,Lz_Nd,color=color,zorder=zorder,label=label,marker=marker,markersize=markersize,linewidth=linewidth)
+        ax.plot(vr_Nd,Lz_Nd,marker,color=color,zorder=zorder,label=label,markersize=markersize,linewidth=linewidth)
 
         if auto:
             ax.axis([-150,150,1000,2500])
